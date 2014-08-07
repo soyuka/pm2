@@ -18,7 +18,7 @@ pm2 is perfect when you need to spread your stateless Node.js code accross all C
 
 Tested with Node v0.11, v0.10 (https://travis-ci.org/Unitech/pm2).
 
-**The recommended Node.js version is v0.11.10**
+**The recommended Node.js version is v0.11.13**
 
 Compatible with CoffeeScript.
 Works on Linux & MacOS.
@@ -197,7 +197,7 @@ $ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
 $ pm2 start app.js -x            # Start app.js in fork mode instead of cluster
 $ pm2 start app.js -x -- -a 23   # Start app.js in fork mode and pass arguments (-a 23)
 
-$ pm2 start app.js --log-date-format ""YYYY-MM-DD HH:mm Z"    # Log will be prefixed with custom time format
+$ pm2 start app.js --log-date-format "YYYY-MM-DD HH:mm Z"    # Log will be prefixed with custom time format
 
 $ pm2 start app.js --name serverone # Start a process an name it as server one
                                     # you can now stop the process by doing
@@ -390,7 +390,7 @@ If your app is well-designed (**stateless**) you'll be able to **process many mo
 Important concepts to make a Node.js app stateless:
 
 - Sessions must not be stored in memory but shared via a database (Redis, Mongo, whatever)
-- [WebSocket/Socket.io should communicate via a database](https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO)
+- [WebSocket/Socket.io should communicate via a database](http://socket.io/docs/using-multiple-nodes/#passing-events-between-nodes)
 
 <a name="a690"/>
 ## Reloading without downtime
@@ -540,7 +540,7 @@ You can define parameters for your apps in `processes.json`:
     "name"        : "echo",
     "script"      : "examples/args.js",
     "args"        : "['--toto=heya coco', '-d', '1']",
-    "log-date-format"  : "YYYY-MM-DD HH:mm Z",
+    "log_date_format"  : "YYYY-MM-DD HH:mm Z",
     "ignoreWatch" : ["[\\/\\\\]\\./", "node_modules"],
     "watch"       : "true",
     "cwd"         : "/this/is/a/path/to/start/script",
@@ -552,7 +552,7 @@ You can define parameters for your apps in `processes.json`:
     "name"       : "api",
     "script"     : "./examples/child.js",
     "instances"  : "4",
-    "log-date-format"  : "YYYY-MM-DD",
+    "log_date_format"  : "YYYY-MM-DD",
     "error_file" : "./examples/child-err.log",
     "out_file"   : "./examples/child-out.log",
     "pid_file"   : "./examples/child.pid",
@@ -611,7 +611,7 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "cwd"              : "/srv/node-app/current",
   "args"             : "['--toto=heya coco', '-d', '1']",
   "script"           : "bin/app.js",
-  "log-date-format"  : "YYYY-MM-DD HH:mm Z",
+  "log_date_format"  : "YYYY-MM-DD HH:mm Z",
   "error_file"       : "/var/log/node-app/node-app.stderr.log",
   "out_file"         : "log/node-app.stdout.log",
   "pid_file"         : "pids/node-geo-api.pid",
@@ -1146,6 +1146,7 @@ By using the fork mode you will lose core features of pm2 like the automatic clu
 - [Vagrant and pm2 #289](https://github.com/Unitech/pm2/issues/289#issuecomment-42900019)
 - [Start the same app on different ports #322](https://github.com/Unitech/pm2/issues/322#issuecomment-46792733)
 - [Using ansible with pm2](https://github.com/Unitech/pm2/issues/88#issuecomment-49106686)
+- [Cron string as argument](https://github.com/Unitech/pm2/issues/496#issuecomment-49323861)
 
 ## Contributors
 
