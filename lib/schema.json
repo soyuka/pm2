@@ -123,8 +123,5 @@
   },
   "post_update": {
     "type": "array"
-  },
-  "treekill": {
-    "type": "boolean" 
   }
 }
