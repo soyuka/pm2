@@ -63,3 +63,18 @@ $pm2 kill
 $pm2 l
 NODE_PATH='/test2' $pm2 start local_require.js -i 1
 should 'should have loaded the right globalPaths' 'restart_time: 0' 1
+
+$pm2 kill
+$pm2 start env-multiple.json --env staging
+
+grep 'staging' out-env-multiple.log &> /dev/null
+spec "should contain staging variable"
+
+rm out-env-multiple.log
+
+$pm2 restart env-multiple.json --env production
+
+grep 'production' out-env-multiple.log &> /dev/null
+spec "should contain production variable"
+
+
